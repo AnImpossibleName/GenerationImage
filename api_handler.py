@@ -10,7 +10,7 @@ def generate_image(prompt_text):
                                 'prompt': (None, prompt_text, 'text/plain')
                             },
                             headers={
-                                'x-api-key': '071860c79d25f0ad2a8112caeecf607cd313526cf0901b7ed44d535c2610c989f556244fc378c7c48722ae439b9b9b38'}
+                                'x-api-key': 'XXXXX'}
                             )
         req.raise_for_status()
         image_data = req.content

@@ -1,11 +1,10 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from GUI.MainWin import Ui_MainWindow  # 导入由UI文件生成的Python代码
-
+from GUI.Login import Ui_login  # 导入由UI文件生成的Python代码
 
 class MyMainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.ui = Ui_MainWindow()
+        self.ui = Ui_login()
         self.ui.setupUi(self)
 
 
@@ -14,5 +13,5 @@ if __name__ == "__main__":
 
     app = QApplication(sys.argv)
     mainWindow = MyMainWindow()
-    mainWindow.showMaximized()
+    mainWindow.show()
     sys.exit(app.exec())

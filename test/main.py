@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from PIL import Image
 from io import BytesIO
-import api_handler
+from test import api_handler
 
 
 def generate_image():

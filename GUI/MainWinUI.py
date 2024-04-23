@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'MainWin.ui'
+# Form implementation generated from reading ui file 'MainWinUI.ui'
 #
 # Created by: PyQt6 UI code generator 6.6.1
 #
@@ -7,6 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtWidgets import QMainWindow
 
 
 class Ui_MainWindow(object):
@@ -120,7 +121,7 @@ class Ui_MainWindow(object):
                                         "color:rgb(255, 255, 255)")
         icon_logout = QtGui.QIcon()
         icon_logout.addPixmap(QtGui.QPixmap("./Icon/退出登录.png"), QtGui.QIcon.Mode.Normal,
-                       QtGui.QIcon.State.Off)
+                              QtGui.QIcon.State.Off)
         self.LogoutButton.setIcon(icon_logout)
         self.LogoutButton.setObjectName("LogoutButton")
         self.verticalLayout_3.addWidget(self.LogoutButton)
@@ -155,6 +156,7 @@ class Ui_MainWindow(object):
         self.pushButton.setStyleSheet("font: 16pt \"Microsoft YaHei UI\";\n"
                                       "background-color:rgb(0, 255, 0)")
         self.pushButton.setObjectName("pushButton")
+        self.pushButton.clicked.connect(self.pushButton_clicked)
         self.verticalLayout.addWidget(self.pushButton)
         self.horizontalLayout.addWidget(self.imageShow)
         self.postArea = QtWidgets.QScrollArea(parent=self.centralwidget)
@@ -380,4 +382,11 @@ class Ui_MainWindow(object):
         else:
             self.settingArea.show()
             self.showButton.setIcon(self.icon_hide)
+
+    def pushButton_clicked(self):
+        Thekey = self.KeyContent.toPlainText()
+        prompt = self.promptEdit.toPlainText()
+        negative_prompt = self.negative_promptEdit.toPlainText()
+        from Backend.API_handler import push
+        push(Thekey, prompt, negative_prompt)
 

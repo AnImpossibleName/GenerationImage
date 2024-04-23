@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'Login.ui'
+# Form implementation generated from reading ui file 'LoginUI.ui'
 #
 # Created by: PyQt6 UI code generator 6.6.1
 #
@@ -7,9 +7,33 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtWidgets import QMainWindow, QApplication
+from MainWinUI import Ui_MainWindow
 
 
 class Ui_login(object):
+    login_success_signal = pyqtSignal()
+
+    def __init__(self):
+        self.Button_login = None
+        self.registerWidget = None
+        self.Button_back = None
+        self.label_password = None
+        self.label_name = None
+        self.Button_toregister = None
+        self.login_name = None
+        self.login_password = None
+        self.gridLayout = None
+        self.loginWidget = None
+        self.verticalLayout_2 = None
+        self.scrollArea_2 = None
+        self.scrollArea = None
+        self.AppTitle = None
+        self.verticalLayout = None
+        self.centralwidget = None
+        self.register_name = None
+
     def setupUi(self, login):
         login.setObjectName("login")
         login.resize(450, 300)
@@ -47,7 +71,8 @@ class Ui_login(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.loginWidget = QtWidgets.QWidget(parent=self.scrollArea_2)
         self.loginWidget.setEnabled(True)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred,
+                                           QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.loginWidget.sizePolicy().hasHeightForWidth())
@@ -114,10 +139,10 @@ class Ui_login(object):
         login.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(login)
-        self.Button_toregister.clicked.connect(self.registerWidget.show) # type: ignore
-        self.Button_toregister.clicked.connect(self.loginWidget.hide) # type: ignore
-        self.Button_back.clicked.connect(self.loginWidget.show) # type: ignore
-        self.Button_back.clicked.connect(self.registerWidget.hide) # type: ignore
+        self.Button_toregister.clicked.connect(self.Button_toregister_click)  # type: ignore
+        self.Button_back.clicked.connect(self.Button_back_click)  # type: ignore
+        self.Button_login.clicked.connect(self.Button_login_clicked)
+        self.Button_register.clicked.connect(self.Button_register_clicked)
         QtCore.QMetaObject.connectSlotsByName(login)
 
     def retranslateUi(self, login):
@@ -133,3 +158,46 @@ class Ui_login(object):
         self.label_register_confirm.setText(_translate("login", "确认密码："))
         self.Button_register.setText(_translate("login", "注册"))
         self.Button_back.setText(_translate("login", "返回登陆"))
+
+    def Button_back_click(self):
+        self.loginWidget.show()
+        self.registerWidget.hide()
+        self.register_name.clear()
+        self.register_password.clear()
+        self.register_confirm.clear()
+
+    def Button_toregister_click(self):
+        self.loginWidget.hide()
+        self.registerWidget.show()
+        self.login_name.clear()
+        self.login_password.clear()
+
+    def Button_login_clicked(self):
+        username = self.login_name.text()
+        password = self.login_password.text()
+        print(username + password)
+        MainGUI()
+
+
+
+    def Button_register_clicked(self):
+        username = self.register_name.text()
+        password = self.register_password.text()
+        confirm = self.register_confirm.text()
+        print(username + password + confirm)
+
+
+class MainGUI(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QApplication(sys.argv)
+    loginWindow = MainGUI()
+    loginWindow.show()
+    sys.exit(app.exec())
